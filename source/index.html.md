@@ -1,11 +1,12 @@
 ---
-title: API Reference
+title: Sleeper API
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
   - ruby
   - python
   - javascript
+  - elixir
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
@@ -17,7 +18,7 @@ includes:
 search: true
 ---
 
-# Introduction
+# Sleeper API
 
 Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
 
@@ -25,7 +26,7 @@ We have language bindings in Shell, Ruby, and Python! You can view code examples
 
 This example API documentation page was created with [Slate](https://github.com/lord/slate). Feel free to edit it and use it as a base for your own API's documentation.
 
-# Authentication
+# User
 
 > To authorize, use this code:
 
@@ -42,9 +43,9 @@ api = kittn.authorize('meowmeowmeow')
 ```
 
 ```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+# With shell, you can just curl the username or user_id
+curl "https://api.sleeper.app/v1/user/<username>"
+curl "https://api.sleeper.app/v1/user/<user_id>"
 ```
 
 ```javascript
@@ -236,4 +237,3 @@ This endpoint deletes a specific kitten.
 Parameter | Description
 --------- | -----------
 ID | The ID of the kitten to delete
-
