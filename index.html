@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;,&quot;elixir&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -212,10 +212,6 @@
       <img src="images/logo.png" class="logo" alt="Logo" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
-              <a href="#" data-language-name="javascript">javascript</a>
-              <a href="#" data-language-name="elixir">elixir</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -223,165 +219,132 @@
         <ul class="search-results"></ul>
       <div id="toc" class="toc-list-h1">
           <li>
-            <a href="#sleeper-api" class="toc-h1 toc-link" data-title="sleeper-api">Sleeper API</a>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="introduction">Introduction</a>
           </li>
           <li>
             <a href="#user" class="toc-h1 toc-link" data-title="user">User</a>
           </li>
           <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="kittens">Kittens</a>
+            <a href="#leagues" class="toc-h1 toc-link" data-title="leagues">Leagues</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="get-all-kittens">Get All Kittens</a>
+                    <a href="#get-all-leagues-for-user" class="toc-h2 toc-link" data-title="get-all-leagues-for-user">Get all leagues for user</a>
                   </li>
                   <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="get-a-specific-kitten">Get a Specific Kitten</a>
+                    <a href="#get-a-specific-league" class="toc-h2 toc-link" data-title="get-a-specific-league">Get a specific league</a>
                   </li>
                   <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="delete-a-specific-kitten">Delete a Specific Kitten</a>
+                    <a href="#getting-rosters-in-a-league" class="toc-h2 toc-link" data-title="getting-rosters-in-a-league">Getting rosters in a league</a>
                   </li>
               </ul>
+          </li>
+          <li>
+            <a href="#drafts" class="toc-h1 toc-link" data-title="drafts">Drafts</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-all-drafts-for-user" class="toc-h2 toc-link" data-title="get-all-drafts-for-user">Get all drafts for user</a>
+                  </li>
+                  <li>
+                    <a href="#get-all-drafts-for-a-league" class="toc-h2 toc-link" data-title="get-all-drafts-for-a-league">Get all drafts for a league</a>
+                  </li>
+                  <li>
+                    <a href="#get-a-specific-draft" class="toc-h2 toc-link" data-title="get-a-specific-draft">Get a specific draft</a>
+                  </li>
+                  <li>
+                    <a href="#get-all-picks-in-a-draft" class="toc-h2 toc-link" data-title="get-all-picks-in-a-draft">Get all picks in a draft</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#players" class="toc-h1 toc-link" data-title="players">Players</a>
           </li>
           <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="errors">Errors</a>
           </li>
       </div>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
+            <li><a href='https://sleeper.app'>Go to sleeper.app</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='sleeper-api'>Sleeper API</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+        <h1 id='introduction'>Introduction</h1>
+<p>The Sleeper API is a read-only HTTP API that is free to use and allows access to a user&#39;s leagues, drafts, and rosters.</p>
 
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<p>No API Token is necessary, as you <strong>cannot modify</strong> contents via this API.</p>
 
-<p>This example API documentation page was created with <a href="https://github.com/lord/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
+<p>Be mindful of the frequency of calls.  A general rule is to stay under 1000 API calls per minute, otherwise, you risk being IP-blocked.</p>
 <h1 id='user'>User</h1>
 <blockquote>
-<p>To authorize, use this code:</p>
+<p>To fetch a user object, use this code:</p>
 </blockquote>
-<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just curl the username or user_id</span>
+<pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just curl the username or user_id</span>
 curl <span class="s2">"https://api.sleeper.app/v1/user/&lt;username&gt;"</span>
 curl <span class="s2">"https://api.sleeper.app/v1/user/&lt;user_id&gt;"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
 </code></pre>
 <blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
-</blockquote>
-
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
-
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code>Authorization: meowmeowmeow</code></p>
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves all kittens.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
-</tr>
-<tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
-</tr>
-</tbody></table>
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>You will get a JSON response that looks something like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+  </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sleeperuser"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"display_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SleeperUser"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"avatar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cc12ec49965eb7856f84d71cf85306af"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint retrieves a specific kitten.</p>
+<p>We do not perform authentication as our API is read-only and only contains league information.</p>
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
+<p>Via the <code>user</code> resource, you can GET the user object by either providing the <code>username</code> or <code>user_id</code> of the user.</p>
+
+<p><code>GET https://api.sleeper.app/v1/user/&lt;username&gt;</code></p>
+
+<p><code>GET https://api.sleeper.app/v1/user/&lt;user_id&gt;</code></p>
+
+<aside class="notice">
+Keep in mind that the <code>username</code> of a user can change over time, so if you are storing information, you'll want to hold onto the user_id.
+</aside>
+<h1 id='leagues'>Leagues</h1><h2 id='get-all-leagues-for-user'>Get all leagues for user</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sleeper.app/v1/user/&lt;user_id&gt;/leagues/nfl/2018"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"total_rosters"</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"pre_draft"</span><span class="p">,</span> <span class="c1">// can also be "drafting", "in_season", or "complete"</span>
+    <span class="s2">"sport"</span><span class="p">:</span> <span class="s2">"nfl"</span><span class="p">,</span>
+    <span class="s2">"settings"</span><span class="p">:</span> <span class="p">{</span> <span class="nx">settings</span> <span class="nx">object</span> <span class="p">},</span>
+    <span class="s2">"season_type"</span><span class="p">:</span> <span class="s2">"regular"</span><span class="p">,</span>
+    <span class="s2">"season"</span><span class="p">:</span> <span class="s2">"2018"</span><span class="p">,</span>
+    <span class="s2">"scoring_settings"</span><span class="p">:</span> <span class="p">{</span> <span class="nx">scoring_settings</span> <span class="nx">object</span> <span class="p">},</span>
+    <span class="s2">"roster_positions"</span><span class="p">:</span> <span class="p">[</span> <span class="nx">roster</span> <span class="nx">positions</span> <span class="nx">array</span> <span class="p">],</span>
+    <span class="s2">"previous_league_id"</span><span class="p">:</span> <span class="s2">"198946952535085056"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Sleeperbot Friends League"</span><span class="p">,</span>
+    <span class="s2">"league_id"</span><span class="p">:</span> <span class="s2">"289646328504385536"</span><span class="p">,</span>
+    <span class="s2">"draft_id"</span><span class="p">:</span> <span class="s2">"289646328508579840"</span><span class="p">,</span>
+    <span class="s2">"avatar"</span><span class="p">:</span> <span class="s2">"efaefa889ae24046a53265a3c71b8b64"</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">"total_rosters"</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"in_season"</span><span class="p">,</span>
+    <span class="s2">"sport"</span><span class="p">:</span> <span class="s2">"nfl"</span><span class="p">,</span>
+    <span class="s2">"settings"</span><span class="p">:</span> <span class="p">{</span> <span class="nx">settings</span> <span class="nx">object</span> <span class="p">},</span>
+    <span class="s2">"season_type"</span><span class="p">:</span> <span class="s2">"regular"</span><span class="p">,</span>
+    <span class="s2">"season"</span><span class="p">:</span> <span class="s2">"2018"</span><span class="p">,</span>
+    <span class="s2">"scoring_settings"</span><span class="p">:</span> <span class="p">{</span> <span class="nx">scoring_settings</span> <span class="nx">object</span> <span class="p">},</span>
+    <span class="s2">"roster_positions"</span><span class="p">:</span> <span class="p">[</span> <span class="nx">roster</span> <span class="nx">positions</span> <span class="nx">array</span> <span class="p">],</span>
+    <span class="s2">"previous_league_id"</span><span class="p">:</span> <span class="s2">"198946952535085056"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Sleeperbot Dynasty"</span><span class="p">,</span>
+    <span class="s2">"league_id"</span><span class="p">:</span> <span class="s2">"289646328504385536"</span><span class="p">,</span>
+    <span class="s2">"draft_id"</span><span class="p">:</span> <span class="s2">"289646328508579840"</span><span class="p">,</span>
+    <span class="s2">"avatar"</span><span class="p">:</span> <span class="s2">"efaefa889ae24046a53265a3c71b8b64"</span>
+  <span class="p">},</span>
+<span class="p">]</span>
+</code></pre>
+<p>This endpoint retrieves all leagues.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://api.sleeper.app/v1/user/&lt;user_id&gt;/leagues/&lt;sport&gt;/&lt;season&gt;</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -390,37 +353,42 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>user_id</td>
+<td>The numerical ID of the user.</td>
+</tr>
+<tr>
+<td>sport</td>
+<td>We only support &quot;nfl&quot; right now.</td>
+</tr>
+<tr>
+<td>season</td>
+<td>Season can be 2017, 2018, etc...</td>
 </tr>
 </tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -X DELETE
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<h2 id='get-a-specific-league'>Get a specific league</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sleeper.app/v1/league/&lt;league_id&gt;"</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint deletes a specific kitten.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"total_rosters"</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+  <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"in_season"</span><span class="p">,</span>
+  <span class="s2">"sport"</span><span class="p">:</span> <span class="s2">"nfl"</span><span class="p">,</span>
+  <span class="s2">"settings"</span><span class="p">:</span> <span class="p">{</span> <span class="nx">settings</span> <span class="nx">object</span> <span class="p">},</span>
+  <span class="s2">"season_type"</span><span class="p">:</span> <span class="s2">"regular"</span><span class="p">,</span>
+  <span class="s2">"season"</span><span class="p">:</span> <span class="s2">"2018"</span><span class="p">,</span>
+  <span class="s2">"scoring_settings"</span><span class="p">:</span> <span class="p">{</span> <span class="nx">scoring_settings</span> <span class="nx">object</span> <span class="p">},</span>
+  <span class="s2">"roster_positions"</span><span class="p">:</span> <span class="p">[</span> <span class="nx">roster</span> <span class="nx">positions</span> <span class="nx">array</span> <span class="p">],</span>
+  <span class="s2">"previous_league_id"</span><span class="p">:</span> <span class="s2">"198946952535085056"</span><span class="p">,</span>
+  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Sleeperbot Dynasty"</span><span class="p">,</span>
+  <span class="s2">"league_id"</span><span class="p">:</span> <span class="s2">"289646328504385536"</span><span class="p">,</span>
+  <span class="s2">"draft_id"</span><span class="p">:</span> <span class="s2">"289646328508579840"</span><span class="p">,</span>
+  <span class="s2">"avatar"</span><span class="p">:</span> <span class="s2">"efaefa889ae24046a53265a3c71b8b64"</span>
+<span class="p">}</span>
+</code></pre>
+<p>This endpoint retrieves a specific league.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET https://api.sleeper.app/v1/league/&lt;league_id&gt;</code></p>
 <h3 id='url-parameters-2'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -429,20 +397,378 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
+<td>league_id</td>
+<td>The ID of the league to retrieve</td>
 </tr>
 </tbody></table>
-<h1 id='errors'>Errors</h1>
+<h2 id='getting-rosters-in-a-league'>Getting rosters in a league</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sleeper.app/v1/league/&lt;league_id&gt;/rosters"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"starters"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"2307"</span><span class="p">,</span> <span class="s2">"2257"</span><span class="p">,</span> <span class="s2">"4034"</span><span class="p">,</span> <span class="s2">"147"</span><span class="p">,</span> <span class="s2">"642"</span><span class="p">,</span> <span class="s2">"4039"</span><span class="p">,</span> <span class="s2">"515"</span><span class="p">,</span> <span class="s2">"4149"</span><span class="p">,</span> <span class="s2">"DET"</span><span class="p">],</span>
+    <span class="s2">"settings"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"wins"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+      <span class="s2">"waiver_position"</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+      <span class="s2">"waiver_budget_used"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">"total_moves"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">"ties"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">"losses"</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+      <span class="s2">"fpts_decimal"</span><span class="p">:</span> <span class="mi">78</span><span class="p">,</span>
+      <span class="s2">"fpts_against_decimal"</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
+      <span class="s2">"fpts_against"</span><span class="p">:</span> <span class="mi">1670</span><span class="p">,</span>
+      <span class="s2">"fpts"</span><span class="p">:</span> <span class="mi">1617</span>
+    <span class="p">},</span>
+    <span class="s2">"roster_id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"reserve"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"players"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"1046"</span><span class="p">,</span> <span class="s2">"138"</span><span class="p">,</span> <span class="s2">"147"</span><span class="p">,</span> <span class="s2">"2257"</span><span class="p">,</span> <span class="s2">"2307"</span><span class="p">,</span> <span class="s2">"2319"</span><span class="p">,</span> <span class="s2">"4034"</span><span class="p">,</span> <span class="s2">"4039"</span><span class="p">,</span> <span class="s2">"4040"</span><span class="p">,</span> <span class="s2">"4149"</span><span class="p">,</span> <span class="s2">"421"</span><span class="p">,</span> <span class="s2">"515"</span><span class="p">,</span> <span class="s2">"642"</span><span class="p">,</span> <span class="s2">"745"</span><span class="p">,</span> <span class="s2">"DET"</span><span class="p">],</span>
+    <span class="s2">"owner_id"</span><span class="p">:</span> <span class="s2">"188815879448829952"</span><span class="p">,</span>
+    <span class="s2">"league_id"</span><span class="p">:</span> <span class="s2">"206827432160788480"</span>
+  <span class="p">},</span>
+  <span class="p">...</span>
+<span class="p">]</span>
+</code></pre>
+<p>This endpoint retrieves all rosters in a league.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>GET https://api.sleeper.app/v1/league/&lt;league_id&gt;/rosters</code></p>
+<h3 id='url-parameters-3'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>league_id</td>
+<td>The ID of the league to retrieve rosters from</td>
+</tr>
+</tbody></table>
+<h1 id='drafts'>Drafts</h1><h2 id='get-all-drafts-for-user'>Get all drafts for user</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sleeper.app/v1/user/&lt;user_id&gt;/drafts/nfl/2018"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"snake"</span><span class="p">,</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"complete"</span><span class="p">,</span>
+    <span class="s2">"start_time"</span><span class="p">:</span> <span class="mi">1515700800000</span><span class="p">,</span>
+    <span class="s2">"sport"</span><span class="p">:</span> <span class="s2">"nfl"</span><span class="p">,</span>
+    <span class="s2">"settings"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"teams"</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+      <span class="s2">"slots_wr"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s2">"slots_te"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"slots_rb"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s2">"slots_qb"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"slots_k"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"slots_flex"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s2">"slots_def"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"slots_bn"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+      <span class="s2">"rounds"</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+      <span class="s2">"pick_timer"</span><span class="p">:</span> <span class="mi">120</span>
+    <span class="p">},</span>
+    <span class="s2">"season_type"</span><span class="p">:</span> <span class="s2">"regular"</span><span class="p">,</span>
+    <span class="s2">"season"</span><span class="p">:</span> <span class="s2">"2017"</span><span class="p">,</span>
+    <span class="s2">"metadata"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"scoring_type"</span><span class="p">:</span> <span class="s2">"ppr"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"My Dynasty"</span><span class="p">,</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">""</span>
+    <span class="p">},</span>
+    <span class="s2">"league_id"</span><span class="p">:</span> <span class="s2">"257270637750382592"</span><span class="p">,</span>
+    <span class="s2">"last_picked"</span><span class="p">:</span> <span class="mi">1515700871182</span><span class="p">,</span>
+    <span class="s2">"last_message_time"</span><span class="p">:</span> <span class="mi">1515700942674</span><span class="p">,</span>
+    <span class="s2">"last_message_id"</span><span class="p">:</span> <span class="s2">"257272036450111488"</span><span class="p">,</span>
+    <span class="s2">"draft_order"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="s2">"draft_id"</span><span class="p">:</span> <span class="s2">"257270643320426496"</span><span class="p">,</span>
+    <span class="s2">"creators"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="s2">"created"</span><span class="p">:</span> <span class="mi">1515700610526</span>
+  <span class="p">},</span>
+  <span class="p">...</span>
+<span class="p">]</span>
+</code></pre>
+<p>This endpoint retrieves all drafts by a user.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://api.sleeper.app/v1/user/&lt;user_id&gt;/drafts/&lt;sport&gt;/&lt;season&gt;</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user_id</td>
+<td>The numerical ID of the user.</td>
+</tr>
+<tr>
+<td>sport</td>
+<td>We only support &quot;nfl&quot; right now.</td>
+</tr>
+<tr>
+<td>season</td>
+<td>Season can be 2017, 2018, etc...</td>
+</tr>
+</tbody></table>
+<h2 id='get-all-drafts-for-a-league'>Get all drafts for a league</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sleeper.app/v1/league/&lt;league_id&gt;/drafts"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"snake"</span><span class="p">,</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"complete"</span><span class="p">,</span>
+    <span class="s2">"start_time"</span><span class="p">:</span> <span class="mi">1515700800000</span><span class="p">,</span>
+    <span class="s2">"sport"</span><span class="p">:</span> <span class="s2">"nfl"</span><span class="p">,</span>
+    <span class="s2">"settings"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"teams"</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+      <span class="s2">"slots_wr"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s2">"slots_te"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"slots_rb"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s2">"slots_qb"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"slots_k"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"slots_flex"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s2">"slots_def"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"slots_bn"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+      <span class="s2">"rounds"</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+      <span class="s2">"pick_timer"</span><span class="p">:</span> <span class="mi">120</span>
+    <span class="p">},</span>
+    <span class="s2">"season_type"</span><span class="p">:</span> <span class="s2">"regular"</span><span class="p">,</span>
+    <span class="s2">"season"</span><span class="p">:</span> <span class="s2">"2017"</span><span class="p">,</span>
+    <span class="s2">"metadata"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"scoring_type"</span><span class="p">:</span> <span class="s2">"ppr"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"My Dynasty"</span><span class="p">,</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">""</span>
+    <span class="p">},</span>
+    <span class="s2">"league_id"</span><span class="p">:</span> <span class="s2">"257270637750382592"</span><span class="p">,</span>
+    <span class="s2">"last_picked"</span><span class="p">:</span> <span class="mi">1515700871182</span><span class="p">,</span>
+    <span class="s2">"last_message_time"</span><span class="p">:</span> <span class="mi">1515700942674</span><span class="p">,</span>
+    <span class="s2">"last_message_id"</span><span class="p">:</span> <span class="s2">"257272036450111488"</span><span class="p">,</span>
+    <span class="s2">"draft_order"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="s2">"draft_id"</span><span class="p">:</span> <span class="s2">"257270643320426496"</span><span class="p">,</span>
+    <span class="s2">"creators"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="s2">"created"</span><span class="p">:</span> <span class="mi">1515700610526</span>
+  <span class="p">},</span>
+  <span class="p">...</span>
+<span class="p">]</span>
+</code></pre>
+<p>This endpoint retrieves all drafts for a league.  Keep in mind that a league can have multiple drafts, especially dynasty leagues.  </p>
+
+<p>Drafts are sorted by most recent to earliest.  Most leagues should only have one draft.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET https://api.sleeper.app/v1/league/&lt;league_id&gt;/drafts</code></p>
+<h3 id='url-parameters-2'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>league_id</td>
+<td>The ID of the league for which you are trying to retrieve drafts.</td>
+</tr>
+</tbody></table>
+<h2 id='get-a-specific-draft'>Get a specific draft</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sleeper.app/v1/draft/&lt;draft_id&gt;"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"snake"</span><span class="p">,</span>
+  <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"complete"</span><span class="p">,</span>
+  <span class="s2">"start_time"</span><span class="p">:</span> <span class="mi">1515700800000</span><span class="p">,</span>
+  <span class="s2">"sport"</span><span class="p">:</span> <span class="s2">"nfl"</span><span class="p">,</span>
+  <span class="s2">"settings"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"teams"</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+    <span class="s2">"slots_wr"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">"slots_te"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"slots_rb"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">"slots_qb"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"slots_k"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"slots_flex"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">"slots_def"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"slots_bn"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="s2">"rounds"</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="s2">"pick_timer"</span><span class="p">:</span> <span class="mi">120</span>
+  <span class="p">},</span>
+  <span class="s2">"season_type"</span><span class="p">:</span> <span class="s2">"regular"</span><span class="p">,</span>
+  <span class="s2">"season"</span><span class="p">:</span> <span class="s2">"2017"</span><span class="p">,</span>
+  <span class="s2">"metadata"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"scoring_type"</span><span class="p">:</span> <span class="s2">"ppr"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"My Dynasty"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">""</span>
+  <span class="p">},</span>
+  <span class="s2">"league_id"</span><span class="p">:</span> <span class="s2">"257270637750382592"</span><span class="p">,</span>
+  <span class="s2">"last_picked"</span><span class="p">:</span> <span class="mi">1515700871182</span><span class="p">,</span>
+  <span class="s2">"last_message_time"</span><span class="p">:</span> <span class="mi">1515700942674</span><span class="p">,</span>
+  <span class="s2">"last_message_id"</span><span class="p">:</span> <span class="s2">"257272036450111488"</span><span class="p">,</span>
+  <span class="s2">"draft_order"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"draft_id"</span><span class="p">:</span> <span class="s2">"257270643320426496"</span><span class="p">,</span>
+  <span class="s2">"creators"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="s2">"created"</span><span class="p">:</span> <span class="mi">1515700610526</span>
+<span class="p">}</span>
+</code></pre>
+<p>This endpoint retrieves a specific draft.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>GET https://api.sleeper.app/v1/draft/&lt;draft_id&gt;</code></p>
+<h3 id='url-parameters-3'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>draft_id</td>
+<td>The ID of the draft to retrieve</td>
+</tr>
+</tbody></table>
+<h2 id='get-all-picks-in-a-draft'>Get all picks in a draft</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sleeper.app/v1/draft/&lt;draft_id&gt;/picks"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"player_id"</span><span class="p">:</span> <span class="s2">"2391"</span><span class="p">,</span>
+    <span class="s2">"picked_by"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="s2">"pick_no"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"metadata"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"team"</span><span class="p">:</span> <span class="s2">"ARI"</span><span class="p">,</span>
+      <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"Injured Reserve"</span><span class="p">,</span>
+      <span class="s2">"sport"</span><span class="p">:</span> <span class="s2">"nfl"</span><span class="p">,</span>
+      <span class="s2">"position"</span><span class="p">:</span> <span class="s2">"RB"</span><span class="p">,</span>
+      <span class="s2">"player_id"</span><span class="p">:</span> <span class="s2">"2391"</span><span class="p">,</span>
+      <span class="s2">"number"</span><span class="p">:</span> <span class="s2">"31"</span><span class="p">,</span>
+      <span class="s2">"news_updated"</span><span class="p">:</span> <span class="s2">"1513007102037"</span><span class="p">,</span>
+      <span class="s2">"last_name"</span><span class="p">:</span> <span class="s2">"Johnson"</span><span class="p">,</span>
+      <span class="s2">"injury_status"</span><span class="p">:</span> <span class="s2">"Out"</span><span class="p">,</span>
+      <span class="s2">"first_name"</span><span class="p">:</span> <span class="s2">"David"</span>
+    <span class="p">},</span>
+    <span class="s2">"is_keeper"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="s2">"draft_id"</span><span class="p">:</span> <span class="s2">"257270643320426496"</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">"player_id"</span><span class="p">:</span> <span class="s2">"1408"</span><span class="p">,</span>
+    <span class="s2">"picked_by"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="s2">"pick_no"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">"metadata"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"team"</span><span class="p">:</span> <span class="s2">"PIT"</span><span class="p">,</span>
+      <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"Active"</span><span class="p">,</span>
+      <span class="s2">"sport"</span><span class="p">:</span> <span class="s2">"nfl"</span><span class="p">,</span>
+      <span class="s2">"position"</span><span class="p">:</span> <span class="s2">"RB"</span><span class="p">,</span>
+      <span class="s2">"player_id"</span><span class="p">:</span> <span class="s2">"1408"</span><span class="p">,</span>
+      <span class="s2">"number"</span><span class="p">:</span> <span class="s2">"26"</span><span class="p">,</span>
+      <span class="s2">"news_updated"</span><span class="p">:</span> <span class="s2">"1515698101257"</span><span class="p">,</span>
+      <span class="s2">"last_name"</span><span class="p">:</span> <span class="s2">"Bell"</span><span class="p">,</span>
+      <span class="s2">"injury_status"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"first_name"</span><span class="p">:</span> <span class="s2">"Le'Veon"</span>
+    <span class="p">},</span>
+    <span class="s2">"is_keeper"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="s2">"draft_id"</span><span class="p">:</span> <span class="s2">"257270643320426496"</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">"player_id"</span><span class="p">:</span> <span class="s2">"536"</span><span class="p">,</span>
+    <span class="s2">"picked_by"</span><span class="p">:</span> <span class="s2">"667279356739584"</span><span class="p">,</span>
+    <span class="s2">"pick_no"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s2">"metadata"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"team"</span><span class="p">:</span> <span class="s2">"PIT"</span><span class="p">,</span>
+      <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"Active"</span><span class="p">,</span>
+      <span class="s2">"sport"</span><span class="p">:</span> <span class="s2">"nfl"</span><span class="p">,</span>
+      <span class="s2">"position"</span><span class="p">:</span> <span class="s2">"WR"</span><span class="p">,</span>
+      <span class="s2">"player_id"</span><span class="p">:</span> <span class="s2">"536"</span><span class="p">,</span>
+      <span class="s2">"number"</span><span class="p">:</span> <span class="s2">"84"</span><span class="p">,</span>
+      <span class="s2">"news_updated"</span><span class="p">:</span> <span class="s2">"1515673801292"</span><span class="p">,</span>
+      <span class="s2">"last_name"</span><span class="p">:</span> <span class="s2">"Brown"</span><span class="p">,</span>
+      <span class="s2">"injury_status"</span><span class="p">:</span> <span class="s2">"Probable"</span><span class="p">,</span>
+      <span class="s2">"first_name"</span><span class="p">:</span> <span class="s2">"Antonio"</span>
+    <span class="p">},</span>
+    <span class="s2">"is_keeper"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="s2">"draft_id"</span><span class="p">:</span> <span class="s2">"257270643320426496"</span>
+  <span class="p">},</span>
+  <span class="p">...</span>
+<span class="p">]</span>
+</code></pre>
+<p>This endpoint retrieves all rosters in a league.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>GET https://api.sleeper.app/v1/draft/&lt;draft_id&gt;/picks</code></p>
+<h3 id='url-parameters-4'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>draft_id</td>
+<td>The ID of the draft to retrieve picks for</td>
+</tr>
+</tbody></table>
+<h1 id='players'>Players</h1>
+<blockquote>
+<p>To fetch a user object, use this code:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sleeper.app/v1/players/nfl"</span>
+</code></pre>
+<blockquote>
+<p>You will get a JSON response that looks something like this:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"3086"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"hashtag"</span><span class="p">:</span> <span class="s2">"#TomBrady-NFL-NE-12"</span><span class="p">,</span>
+    <span class="s2">"depth_chart_position"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"Active"</span><span class="p">,</span>
+    <span class="s2">"sport"</span><span class="p">:</span> <span class="s2">"nfl"</span><span class="p">,</span>
+    <span class="s2">"fantasy_positions"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"QB"</span><span class="p">],</span>
+    <span class="s2">"number"</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+    <span class="s2">"search_last_name"</span><span class="p">:</span> <span class="s2">"brady"</span><span class="p">,</span>
+    <span class="s2">"injury_start_date"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="s2">"weight"</span><span class="p">:</span> <span class="s2">"220"</span><span class="p">,</span>
+    <span class="s2">"position"</span><span class="p">:</span> <span class="s2">"QB"</span><span class="p">,</span>
+    <span class="s2">"practice_participation"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="s2">"sportradar_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"team"</span><span class="p">:</span> <span class="s2">"NE"</span><span class="p">,</span>
+    <span class="s2">"last_name"</span><span class="p">:</span> <span class="s2">"Brady"</span><span class="p">,</span>
+    <span class="s2">"college"</span><span class="p">:</span> <span class="s2">"Michigan"</span><span class="p">,</span>
+    <span class="s2">"fantasy_data_id"</span><span class="p">:</span><span class="mi">17836</span><span class="p">,</span>
+    <span class="s2">"injury_status"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span>
+    <span class="s2">"player_id"</span><span class="p">:</span><span class="s2">"3086"</span><span class="p">,</span>
+    <span class="s2">"height"</span><span class="p">:</span> <span class="s2">"6'4\""</span><span class="p">,</span>
+    <span class="s2">"search_full_name"</span><span class="p">:</span> <span class="s2">"tombrady"</span><span class="p">,</span>
+    <span class="s2">"age"</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span>
+    <span class="s2">"stats_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"birth_country"</span><span class="p">:</span> <span class="s2">"United States"</span><span class="p">,</span>
+    <span class="s2">"espn_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"search_rank"</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
+    <span class="s2">"first_name"</span><span class="p">:</span> <span class="s2">"Tom"</span><span class="p">,</span>
+    <span class="s2">"depth_chart_order"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"years_exp"</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+    <span class="s2">"rotowire_id"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="s2">"rotoworld_id"</span><span class="p">:</span> <span class="mi">8356</span><span class="p">,</span>
+    <span class="s2">"search_first_name"</span><span class="p">:</span> <span class="s2">"tom"</span><span class="p">,</span>
+    <span class="s2">"yahoo_id"</span><span class="p">:</span> <span class="kc">null</span>
+  <span class="p">},</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+</code></pre>
 <aside class="notice">
-This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
+Please use this call sparingly, as it is intended only to be used once per day at most to keep your player IDs updated.  The average size of this query is <code>5MB</code>.
 </aside>
 
-<p>The Kittn API uses the following error codes:</p>
+<p>Since rosters and draft picks contain <code>Player IDs</code> which look like <code>&quot;1042&quot;</code>, <code>&quot;2403&quot;</code>, <code>&quot;CAR&quot;</code>, etc, you will need to know what those IDs map to.  The <code>/players</code> call provides you the map necessary to look up any player.</p>
+
+<p>You should <strong>save this information on your own servers</strong> as this is not intended to be called every time you need to look up players due to the filesize being close to 5MB in size.  You do not need to call this endpoint more than once per day.</p>
+
+<p><code>GET https://api.sleeper.app/v1/players/nfl</code></p>
+<h1 id='errors'>Errors</h1>
+<p>The Sleeper API uses the following error codes:</p>
 
 <table><thead>
 <tr>
-<th>Error Code</th>
+<th>Code</th>
 <th>Meaning</th>
 </tr>
 </thead><tbody>
@@ -451,32 +777,8 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
 <td>Bad Request -- Your request is invalid.</td>
 </tr>
 <tr>
-<td>401</td>
-<td>Unauthorized -- Your API key is wrong.</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
-</tr>
-<tr>
 <td>404</td>
 <td>Not Found -- The specified kitten could not be found.</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
 </tr>
 <tr>
 <td>429</td>
@@ -496,10 +798,6 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
-                <a href="#" data-language-name="javascript">javascript</a>
-                <a href="#" data-language-name="elixir">elixir</a>
           </div>
       </div>
     </div>
