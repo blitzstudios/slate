@@ -225,6 +225,9 @@
             <a href="#user" class="toc-h1 toc-link" data-title="user">User</a>
           </li>
           <li>
+            <a href="#avatars" class="toc-h1 toc-link" data-title="avatars">Avatars</a>
+          </li>
+          <li>
             <a href="#leagues" class="toc-h1 toc-link" data-title="leagues">Leagues</a>
               <ul class="toc-list-h2">
                   <li>
@@ -235,6 +238,9 @@
                   </li>
                   <li>
                     <a href="#getting-rosters-in-a-league" class="toc-h2 toc-link" data-title="getting-rosters-in-a-league">Getting rosters in a league</a>
+                  </li>
+                  <li>
+                    <a href="#getting-users-in-a-league" class="toc-h2 toc-link" data-title="getting-users-in-a-league">Getting users in a league</a>
                   </li>
               </ul>
           </li>
@@ -304,6 +310,16 @@ curl <span class="s2">"https://api.sleeper.app/v1/user/&lt;user_id&gt;"</span>
 <aside class="notice">
 Keep in mind that the <code>username</code> of a user can change over time, so if you are storing information, you'll want to hold onto the user_id.
 </aside>
+<h1 id='avatars'>Avatars</h1>
+<p>Users and leagues have <strong>avatar</strong> images.  There are thumbnail and full-size images for each avatar.</p>
+
+<p><strong>Full size URL</strong></p>
+
+<p><code>https://sleepercdn.com/avatars/&lt;avatar_id&gt;</code></p>
+
+<p><strong>Thumbnail URL</strong></p>
+
+<p><code>https://sleepercdn.com/avatars/thumbs/&lt;avatar_id&gt;</code></p>
 <h1 id='leagues'>Leagues</h1><h2 id='get-all-leagues-for-user'>Get all leagues for user</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sleeper.app/v1/user/&lt;user_id&gt;/leagues/nfl/2018"</span>
 </code></pre>
 <blockquote>
@@ -434,6 +450,42 @@ Keep in mind that the <code>username</code> of a user can change over time, so i
 <h3 id='http-request-3'>HTTP Request</h3>
 <p><code>GET https://api.sleeper.app/v1/league/&lt;league_id&gt;/rosters</code></p>
 <h3 id='url-parameters-3'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>league_id</td>
+<td>The ID of the league to retrieve rosters from</td>
+</tr>
+</tbody></table>
+<h2 id='getting-users-in-a-league'>Getting users in a league</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sleeper.app/v1/league/&lt;league_id&gt;/users"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"user_id"</span><span class="p">:</span> <span class="s2">"&lt;user_id&gt;"</span><span class="p">,</span>
+    <span class="s2">"username"</span><span class="p">:</span> <span class="s2">"&lt;username&gt;"</span><span class="p">,</span>
+    <span class="s2">"display_name"</span><span class="p">:</span> <span class="s2">"&lt;display_name&gt;"</span><span class="p">,</span>
+    <span class="s2">"avatar"</span><span class="p">:</span> <span class="s2">"1233456789"</span><span class="p">,</span>
+    <span class="s2">"metadata"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"team_name"</span><span class="p">:</span> <span class="s2">"Dezpacito"</span>
+    <span class="p">},</span>
+    <span class="s2">"is_owner"</span><span class="p">:</span> <span class="kc">true</span>   <span class="c1">// is commissioner (there can be multiple commissioners)</span>
+  <span class="p">},</span>
+  <span class="p">...</span>
+<span class="p">]</span>
+</code></pre>
+<p>This endpoint retrieves all users in a league.</p>
+
+<p>This also includes each user&#39;s <strong>display_name</strong>, <strong>avatar</strong>, and their <strong>metadata</strong> which sometimes includes a nickname they gave their team.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>GET https://api.sleeper.app/v1/league/&lt;league_id&gt;/users</code></p>
+<h3 id='url-parameters-4'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
