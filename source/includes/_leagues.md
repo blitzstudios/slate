@@ -140,3 +140,41 @@ This endpoint retrieves all rosters in a league.
 Parameter | Description
 --------- | -----------
 league_id | The ID of the league to retrieve rosters from
+
+## Getting users in a league
+
+```shell
+curl "https://api.sleeper.app/v1/league/<league_id>/users"
+```
+
+> The above command returns JSON structured like this:
+
+```javascript
+[
+  {
+    "user_id": "<user_id>",
+    "username": "<username>",
+    "display_name": "<display_name>",
+    "avatar": "1233456789",
+    "metadata": {
+      "team_name": "Dezpacito"
+    },
+    "is_owner": true   // is commissioner (there can be multiple commissioners)
+  },
+  ...
+]
+```
+
+This endpoint retrieves all users in a league.
+
+This also includes each user's **display_name**, **avatar**, and their **metadata** which sometimes includes a nickname they gave their team.
+
+### HTTP Request
+
+`GET https://api.sleeper.app/v1/league/<league_id>/users`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+league_id | The ID of the league to retrieve rosters from

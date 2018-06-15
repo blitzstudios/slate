@@ -9,6 +9,7 @@ toc_footers:
 
 includes:
   - user
+  - avatars
   - leagues
   - drafts
   - players
