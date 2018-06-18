@@ -165,7 +165,23 @@ curl "https://api.sleeper.app/v1/draft/<draft_id>"
   "last_picked": 1515700871182,
   "last_message_time": 1515700942674,
   "last_message_id": "257272036450111488",
-  "draft_order": null,
+
+  // this is the user_id to draft slot mapping
+  "draft_order": {
+    "12345678": 1,
+    "23434332": 2,
+    ...
+  },
+
+  // this is the draft slot to roster_id mapping
+  // leagues have rosters, which have roster_ids
+  // this means draft slot 1 (column 1) will go to roster 10, slot 2 will go to roster_id 3, etc
+  "slot_to_roster_id": {
+    "1": 10,
+    "2": 3,
+    "3": 5
+  },
+
   "draft_id": "257270643320426496",
   "creators": null,
   "created": 1515700610526
@@ -199,7 +215,10 @@ curl "https://api.sleeper.app/v1/draft/<draft_id>/picks"
 [
   {
     "player_id": "2391",
-    "picked_by": "0",
+    "picked_by": "234343434", // user_id this pick will go to (not all leagues have users in every slot, this can be "")
+    "roster_id": "1", // roster_id this pick will go to
+    "round": 5,
+    "draft_slot": 5, // which column this is on the draftboard
     "pick_no": 1,
     "metadata": {
       "team": "ARI",
@@ -218,7 +237,10 @@ curl "https://api.sleeper.app/v1/draft/<draft_id>/picks"
   },
   {
     "player_id": "1408",
-    "picked_by": "0",
+    "picked_by": "234343434", // user_id this pick will go to (not all leagues have users in every slot, this can be "")
+    "roster_id": "1", // roster_id this pick will go to
+    "round": 5,
+    "draft_slot": 6,
     "pick_no": 2,
     "metadata": {
       "team": "PIT",
