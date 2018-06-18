@@ -657,7 +657,23 @@ Keep in mind that the <code>username</code> of a user can change over time, so i
   <span class="s2">"last_picked"</span><span class="p">:</span> <span class="mi">1515700871182</span><span class="p">,</span>
   <span class="s2">"last_message_time"</span><span class="p">:</span> <span class="mi">1515700942674</span><span class="p">,</span>
   <span class="s2">"last_message_id"</span><span class="p">:</span> <span class="s2">"257272036450111488"</span><span class="p">,</span>
-  <span class="s2">"draft_order"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+
+  <span class="c1">// this is the user_id to draft slot mapping</span>
+  <span class="s2">"draft_order"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"12345678"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"23434332"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="p">...</span>
+  <span class="p">},</span>
+
+  <span class="c1">// this is the draft slot to roster_id mapping</span>
+  <span class="c1">// leagues have rosters, which have roster_ids</span>
+  <span class="c1">// this means draft slot 1 (column 1) will go to roster 10, slot 2 will go to roster_id 3, etc</span>
+  <span class="s2">"slot_to_roster_id"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"1"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s2">"2"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s2">"3"</span><span class="p">:</span> <span class="mi">5</span>
+  <span class="p">},</span>
+
   <span class="s2">"draft_id"</span><span class="p">:</span> <span class="s2">"257270643320426496"</span><span class="p">,</span>
   <span class="s2">"creators"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
   <span class="s2">"created"</span><span class="p">:</span> <span class="mi">1515700610526</span>
@@ -686,7 +702,10 @@ Keep in mind that the <code>username</code> of a user can change over time, so i
 <pre class="highlight javascript tab-javascript"><code><span class="p">[</span>
   <span class="p">{</span>
     <span class="s2">"player_id"</span><span class="p">:</span> <span class="s2">"2391"</span><span class="p">,</span>
-    <span class="s2">"picked_by"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="s2">"picked_by"</span><span class="p">:</span> <span class="s2">"234343434"</span><span class="p">,</span> <span class="c1">// user_id this pick will go to (not all leagues have users in every slot, this can be "")</span>
+    <span class="s2">"roster_id"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span> <span class="c1">// roster_id this pick will go to</span>
+    <span class="s2">"round"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="s2">"draft_slot"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="c1">// which column this is on the draftboard</span>
     <span class="s2">"pick_no"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="s2">"metadata"</span><span class="p">:</span> <span class="p">{</span>
       <span class="s2">"team"</span><span class="p">:</span> <span class="s2">"ARI"</span><span class="p">,</span>
@@ -705,7 +724,10 @@ Keep in mind that the <code>username</code> of a user can change over time, so i
   <span class="p">},</span>
   <span class="p">{</span>
     <span class="s2">"player_id"</span><span class="p">:</span> <span class="s2">"1408"</span><span class="p">,</span>
-    <span class="s2">"picked_by"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="s2">"picked_by"</span><span class="p">:</span> <span class="s2">"234343434"</span><span class="p">,</span> <span class="c1">// user_id this pick will go to (not all leagues have users in every slot, this can be "")</span>
+    <span class="s2">"roster_id"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span> <span class="c1">// roster_id this pick will go to</span>
+    <span class="s2">"round"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="s2">"draft_slot"</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
     <span class="s2">"pick_no"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
     <span class="s2">"metadata"</span><span class="p">:</span> <span class="p">{</span>
       <span class="s2">"team"</span><span class="p">:</span> <span class="s2">"PIT"</span><span class="p">,</span>
