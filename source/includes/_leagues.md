@@ -247,14 +247,16 @@ This endpoint retrieves the playoff bracket for a league for 4, 6, and 8 team pl
 
 Each row represents a matchup between 2 teams.
 
-Field | Type          | Description
------ | ------------- | -----
-r     | int           | The round for this matchup, 1st, 2nd, 3rd round, etc.
-m     | int           | The match `id` of the matchup, unique for all matchups within a bracket.
-t1    | int or object | The `roster_id` of a team in this matchup OR `{w: 1}` which means the winner of match id `1`
-t2    | int or object | The `roster_id` of the other team in this matchup OR `{l: 1}` which means the loser of match id `1`
-w     | int           | The `roster_id` of the winning team, if the match has been played.
-l     | int           | The `roster_id` of the losing team, if the match has been played.
+Field   | Type          | Description
+------- | ------------- | -----
+r       | int           | The round for this matchup, 1st, 2nd, 3rd round, etc.
+m       | int           | The match `id` of the matchup, unique for all matchups within a bracket.
+t1      | int or object | The `roster_id` of a team in this matchup OR `{w: 1}` which means the winner of match id `1`
+t2      | int or object | The `roster_id` of the other team in this matchup OR `{l: 1}` which means the loser of match id `1`
+w       | int           | The `roster_id` of the winning team, if the match has been played.
+l       | int           | The `roster_id` of the losing team, if the match has been played.
+t1_from | int           | The match `id` that identifies which match team 1 came from, necessary to show bracket progression.
+t2_from | int           | The match `id` that identifies which match team 2 came from, necessary to show bracket progression.
 
 
 ### HTTP Request
