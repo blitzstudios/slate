@@ -242,6 +242,12 @@
                   <li>
                     <a href="#getting-users-in-a-league" class="toc-h2 toc-link" data-title="getting-users-in-a-league">Getting users in a league</a>
                   </li>
+                  <li>
+                    <a href="#getting-matchups-in-a-league" class="toc-h2 toc-link" data-title="getting-matchups-in-a-league">Getting matchups in a league</a>
+                  </li>
+                  <li>
+                    <a href="#getting-the-playoff-bracket" class="toc-h2 toc-link" data-title="getting-the-playoff-bracket">Getting the playoff bracket</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -495,6 +501,120 @@ Keep in mind that the <code>username</code> of a user can change over time, so i
 <tr>
 <td>league_id</td>
 <td>The ID of the league to retrieve rosters from</td>
+</tr>
+</tbody></table>
+<h2 id='getting-matchups-in-a-league'>Getting matchups in a league</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sleeper.app/v1/league/&lt;league_id&gt;/matchups/&lt;week&gt;"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"starters"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"421"</span><span class="p">,</span> <span class="s2">"4035"</span><span class="p">,</span> <span class="s2">"3242"</span><span class="p">,</span> <span class="s2">"2133"</span><span class="p">,</span> <span class="s2">"2449"</span><span class="p">,</span> <span class="s2">"4531"</span><span class="p">,</span> <span class="s2">"2257"</span><span class="p">,</span> <span class="s2">"788"</span><span class="p">,</span> <span class="s2">"PHI"</span><span class="p">],</span>
+    <span class="s2">"roster_id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"players"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"1352"</span><span class="p">,</span> <span class="s2">"1387"</span><span class="p">,</span> <span class="s2">"2118"</span><span class="p">,</span> <span class="s2">"2133"</span><span class="p">,</span> <span class="s2">"2182"</span><span class="p">,</span> <span class="s2">"223"</span><span class="p">,</span> <span class="s2">"2319"</span><span class="p">,</span> <span class="s2">"2449"</span><span class="p">,</span> <span class="s2">"3208"</span><span class="p">,</span> <span class="s2">"4035"</span><span class="p">,</span> <span class="s2">"421"</span><span class="p">,</span> <span class="s2">"4881"</span><span class="p">,</span> <span class="s2">"4892"</span><span class="p">,</span> <span class="s2">"788"</span><span class="p">,</span> <span class="s2">"CLE"</span><span class="p">],</span>
+    <span class="s2">"matchup_id"</span><span class="p">:</span> <span class="mi">2</span>
+  <span class="p">},</span>
+  <span class="p">...</span>
+<span class="p">]</span>
+</code></pre>
+<p>This endpoint retrieves all matchups in a league for a given week.  Each object in the list represents one team.  The two teams with the same <code>matchup_id</code> match up against each other.</p>
+
+<p>The <code>starters</code> is in an ordered list of player_ids, and <code>players</code> is a list of all player_ids in this matchup.</p>
+
+<p>The bench can be deduced by removing the <code>starters</code> from the <code>players</code> field.</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>GET https://api.sleeper.app/v1/league/&lt;league_id&gt;/matchups/&lt;week&gt;</code></p>
+<h3 id='url-parameters-5'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>league_id</td>
+<td>The ID of the league to retrieve matchups from</td>
+</tr>
+<tr>
+<td>week</td>
+<td>The week these matchups take place</td>
+</tr>
+</tbody></table>
+<h2 id='getting-the-playoff-bracket'>Getting the playoff bracket</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sleeper.app/v1/league/&lt;league_id&gt;/winners_bracket"</span>
+curl <span class="s2">"https://api.sleeper.app/v1/league/&lt;league_id&gt;/losers_bracket"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">[</span>
+  <span class="p">{</span><span class="na">r</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">m</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>   <span class="na">t1</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>       <span class="na">t2</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>       <span class="na">w</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="na">l</span><span class="p">:</span> <span class="kc">null</span><span class="p">},</span>
+  <span class="p">{</span><span class="na">r</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">m</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>   <span class="na">t1</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>       <span class="na">t2</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>       <span class="na">w</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="na">l</span><span class="p">:</span> <span class="kc">null</span><span class="p">},</span>
+
+  <span class="p">{</span><span class="na">r</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">m</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>   <span class="na">t1</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>       <span class="na">t2</span><span class="p">:</span> <span class="p">{</span><span class="na">w</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span>  <span class="na">w</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="na">l</span><span class="p">:</span> <span class="kc">null</span><span class="p">},</span>
+  <span class="p">{</span><span class="na">r</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">m</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>   <span class="na">t1</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>       <span class="na">t2</span><span class="p">:</span> <span class="p">{</span><span class="na">w</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>  <span class="na">w</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="na">l</span><span class="p">:</span> <span class="kc">null</span><span class="p">},</span>
+  <span class="p">{</span><span class="na">r</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">m</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>   <span class="na">t1</span><span class="p">:</span> <span class="p">{</span><span class="na">l</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span>  <span class="na">t2</span><span class="p">:</span> <span class="p">{</span><span class="na">l</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>  <span class="na">w</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="na">l</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="na">p</span><span class="p">:</span> <span class="mi">5</span><span class="p">},</span>
+
+  <span class="p">{</span><span class="na">r</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="na">m</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>   <span class="na">t1</span><span class="p">:</span> <span class="p">{</span><span class="na">w</span><span class="p">:</span> <span class="mi">3</span><span class="p">},</span>  <span class="na">t2</span><span class="p">:</span> <span class="p">{</span><span class="na">w</span><span class="p">:</span> <span class="mi">4</span><span class="p">},</span>  <span class="na">w</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="na">l</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="na">p</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span>
+  <span class="p">{</span><span class="na">r</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="na">m</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>   <span class="na">t1</span><span class="p">:</span> <span class="p">{</span><span class="na">l</span><span class="p">:</span> <span class="mi">3</span><span class="p">},</span>  <span class="na">t2</span><span class="p">:</span> <span class="p">{</span><span class="na">l</span><span class="p">:</span> <span class="mi">4</span><span class="p">},</span>  <span class="na">w</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="na">l</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="na">p</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+<span class="p">]</span>
+</code></pre>
+<p>This endpoint retrieves the playoff bracket for a league for 4, 6, and 8 team playoffs.</p>
+
+<p>Each row represents a matchup between 2 teams.</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>r</td>
+<td>int</td>
+<td>The round for this matchup, 1st, 2nd, 3rd round, etc.</td>
+</tr>
+<tr>
+<td>m</td>
+<td>int</td>
+<td>The match <code>id</code> of the matchup, unique for all matchups within a bracket.</td>
+</tr>
+<tr>
+<td>t1</td>
+<td>int or object</td>
+<td>The <code>roster_id</code> of a team in this matchup OR <code>{w: 1}</code> which means the winner of match id <code>1</code></td>
+</tr>
+<tr>
+<td>t2</td>
+<td>int or object</td>
+<td>The <code>roster_id</code> of the other team in this matchup OR <code>{l: 1}</code> which means the loser of match id <code>1</code></td>
+</tr>
+<tr>
+<td>w</td>
+<td>int</td>
+<td>The <code>roster_id</code> of the winning team, if the match has been played.</td>
+</tr>
+<tr>
+<td>l</td>
+<td>int</td>
+<td>The <code>roster_id</code> of the losing team, if the match has been played.</td>
+</tr>
+</tbody></table>
+<h3 id='http-request-6'>HTTP Request</h3>
+<p><code>GET https://api.sleeper.app/v1/league/&lt;league_id&gt;/winners_bracket</code></p>
+
+<p><code>GET https://api.sleeper.app/v1/league/&lt;league_id&gt;/loses_bracket</code></p>
+<h3 id='url-parameters-6'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>league_id</td>
+<td>The ID of the league to retrieve matchups from</td>
 </tr>
 </tbody></table>
 <h1 id='drafts'>Drafts</h1><h2 id='get-all-drafts-for-user'>Get all drafts for user</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sleeper.app/v1/user/&lt;user_id&gt;/drafts/nfl/2018"</span>
