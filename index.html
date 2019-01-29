@@ -600,6 +600,16 @@ curl <span class="s2">"https://api.sleeper.app/v1/league/&lt;league_id&gt;/loser
 <td>int</td>
 <td>The <code>roster_id</code> of the losing team, if the match has been played.</td>
 </tr>
+<tr>
+<td>t1_from</td>
+<td>int</td>
+<td>The match <code>id</code> that identifies which match team 1 came from, necessary to show bracket progression.</td>
+</tr>
+<tr>
+<td>t2_from</td>
+<td>int</td>
+<td>The match <code>id</code> that identifies which match team 2 came from, necessary to show bracket progression.</td>
+</tr>
 </tbody></table>
 <h3 id='http-request-6'>HTTP Request</h3>
 <p><code>GET https://api.sleeper.app/v1/league/&lt;league_id&gt;/winners_bracket</code></p>
