@@ -231,15 +231,15 @@ curl "https://api.sleeper.app/v1/league/<league_id>/losers_bracket"
 
 ```javascript
 [
-  {r: 1, m: 1,   t1: 3,       t2: 6,       w: null, l: null},
-  {r: 1, m: 2,   t1: 4,       t2: 5,       w: null, l: null},
+  {r: 1, m: 1,   t1: 3,    t2: 6,     w: null, l: null},
+  {r: 1, m: 2,   t1: 4,    t2: 5,     w: null, l: null},
 
-  {r: 2, m: 3,   t1: 1,       t2: {w: 1},  w: null, l: null},
-  {r: 2, m: 4,   t1: 2,       t2: {w: 2},  w: null, l: null},
-  {r: 2, m: 5,   t1: {l: 1},  t2: {l: 2},  w: null, l: null, p: 5},
+  {r: 2, m: 3,   t1: 1,    t2: null,  t2_from: {w: 1},  w: null, l: null},
+  {r: 2, m: 4,   t1: 2,    t2: null,  t2_from: {w: 2},  w: null, l: null},
+  {r: 2, m: 5,   t1: null, t2: null,  t1_from: {l: 1},  t2_from: {l: 2},  w: null, l: null, p: 5},
 
-  {r: 3, m: 6,   t1: {w: 3},  t2: {w: 4},  w: null, l: null, p: 1},
-  {r: 3, m: 7,   t1: {l: 3},  t2: {l: 4},  w: null, l: null, p: 3}
+  {r: 3, m: 6,   t1: null, t2: null,  t1_from: {w: 3},  t2_from: {w: 4},  w: null, l: null, p: 1},
+  {r: 3, m: 7,   t1: null, t2: null,  t1_from: {l: 3},  t2_from: {l: 4},  w: null, l: null, p: 3}
 ]
 ```
 
@@ -247,16 +247,16 @@ This endpoint retrieves the playoff bracket for a league for 4, 6, and 8 team pl
 
 Each row represents a matchup between 2 teams.
 
-Field   | Type          | Description
-------- | ------------- | -----
-r       | int           | The round for this matchup, 1st, 2nd, 3rd round, etc.
-m       | int           | The match `id` of the matchup, unique for all matchups within a bracket.
-t1      | int or object | The `roster_id` of a team in this matchup OR `{w: 1}` which means the winner of match id `1`
-t2      | int or object | The `roster_id` of the other team in this matchup OR `{l: 1}` which means the loser of match id `1`
-w       | int           | The `roster_id` of the winning team, if the match has been played.
-l       | int           | The `roster_id` of the losing team, if the match has been played.
-t1_from | int           | The match `id` that identifies which match team 1 came from, necessary to show bracket progression.
-t2_from | int           | The match `id` that identifies which match team 2 came from, necessary to show bracket progression.
+Field   | Type   | Description
+------- | ------ | -----
+r       | int    | The round for this matchup, 1st, 2nd, 3rd round, etc.
+m       | int    | The match `id` of the matchup, unique for all matchups within a bracket.
+t1      | int    | The `roster_id` of a team in this matchup OR `{w: 1}` which means the winner of match id `1`
+t2      | int    | The `roster_id` of the other team in this matchup OR `{l: 1}` which means the loser of match id `1`
+w       | int    | The `roster_id` of the winning team, if the match has been played.
+l       | int    | The `roster_id` of the losing team, if the match has been played.
+t1_from | object | Where t1 comes from, either winner or loser of the match `id`, necessary to show bracket progression.
+t2_from | object | Where t2 comes from, either winner or loser of the match `id`, necessary to show bracket progression.
 
 
 ### HTTP Request
