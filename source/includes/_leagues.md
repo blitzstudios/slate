@@ -270,3 +270,134 @@ t2_from | object | Where t2 comes from, either winner or loser of the match `id`
 Parameter | Description
 --------- | -----------
 league_id | The ID of the league to retrieve matchups from
+
+
+
+## Get transactions
+
+```shell
+curl "https://api.sleeper.app/v1/league/<league_id>/transactions/<round>"
+```
+
+> The above command returns JSON structured like this:
+
+```javascript
+[
+  {
+    "type": "trade",
+    "transaction_id": "434852362033561600",
+    "status_updated": 1558039402803,
+    "status": "complete",
+    "settings": null,     // trades do not use this field
+    "roster_ids": [2, 1], // roster_ids involved in this transaction
+    "metadata": null,
+    "leg": 1,         // in football, this is the week
+    "drops": null,
+    "draft_picks": [  // picks that were traded
+      {
+        "season": "2019",// the season this draft pick belongs to
+        "round": 5,      // which round this draft pick is
+        "roster_id": 1,  // original owner's roster_id
+        "previous_owner_id": 1,  // previous owner's roster id (in this trade)
+        "owner_id": 2,   // the new owner of this pick after the trade
+      },
+      {
+        "season": "2019",
+        "round": 3,
+        "roster_id": 2,
+        "previous_owner_id": 2,
+        "owner_id": 1,
+      }
+    ],
+    "creator": "160000000000000000",  // user id who initiated the transaction
+    "created": 1558039391576,
+    "consenter_ids": [2, 1], // roster_ids of the people who agreed to this transaction
+    "adds": null
+    "waiver_budget": [   // roster_id 2 sends 55 FAAB dollars to roster_id 3
+      {
+        "sender": 2,
+        "receiver": 3,
+        "amount": 55
+      }
+    ],
+  },
+  {
+    "type": "free_agent",  // could be waiver or trade as well
+    "transaction_id": "434890120798142464",
+    "status_updated": 1558048393967,
+    "status": "complete",
+    "settings": null,   // could be {'waiver_bid': 44} if it's FAAB waivers
+    "roster_ids": [1],  // roster_ids involved in this transaction
+    "metadata": null,   // can contain notes in waivers like why it didn't go through
+    "leg": 1,
+    "drops": {
+      "1736": 1         // player id 1736 dropped from roster_id 1
+    },
+    "draft_picks": [],
+    "creator": "160000000000000000",
+    "created": 1558048393967,
+    "consenter_ids": [1], // the roster_ids who agreed to this transaction
+    "adds": {
+      "2315": 1   // player id 2315 added to roster_id 1
+      ...
+    },
+    "waiver_budget": []  // this used for trades only involving FAAB
+  },
+  ...
+]
+```
+
+This endpoint retrieves all traded picks in a league, including future picks.
+
+### HTTP Request
+
+`GET https://api.sleeper.app/v1/league/<league_id>/transactions/<round>`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+league_id | The ID of the draft to retrieve picks for
+round     | The week you want to pull from
+
+
+
+## Get traded picks
+
+```shell
+curl "https://api.sleeper.app/v1/league/<league_id>/traded_picks"
+```
+
+> The above command returns JSON structured like this:
+
+```javascript
+[
+  {
+    "season": "2019",        // which season the pick is for
+    "round": 5,              // which round the pick is
+    "roster_id": 1,          // roster_id of ORIGINAL owner
+    "previous_owner_id": 1,  // roster_id of the previous owner
+    "owner_id": 2,           // roster_id of current owner
+  },
+  {
+    "season": "2020",        // which season the pick is for
+    "round": 3,              // which round the pick is
+    "roster_id": 2,          // roster_id of original owner
+    "previous_owner_id": 2,  // roster_id of previous owner
+    "owner_id": 1,           // roster_id of current owner
+  },
+  ...
+]
+```
+
+This endpoint retrieves all traded picks in a league, including future picks.
+
+### HTTP Request
+
+`GET https://api.sleeper.app/v1/league/<league_id>/traded_picks`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+league_id | The ID of the league to retrieve traded picks for

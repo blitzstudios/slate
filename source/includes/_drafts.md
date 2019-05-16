@@ -280,11 +280,53 @@ curl "https://api.sleeper.app/v1/draft/<draft_id>/picks"
 ]
 ```
 
-This endpoint retrieves all rosters in a league.
+This endpoint retrieves all picks in a draft.
 
 ### HTTP Request
 
 `GET https://api.sleeper.app/v1/draft/<draft_id>/picks`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+draft_id  | The ID of the draft to retrieve picks for
+
+
+
+## Get traded picks in a draft
+
+```shell
+curl "https://api.sleeper.app/v1/draft/<draft_id>/traded_picks"
+```
+
+> The above command returns JSON structured like this:
+
+```javascript
+[
+  {
+    "season": "2019",
+    "round": 5,              // which round the pick is
+    "roster_id": 1,          // roster_id of ORIGINAL owner
+    "previous_owner_id": 1,  // roster_id of the previous owner
+    "owner_id": 2,           // roster_id of current owner
+  },
+  {
+    "season": "2019",
+    "round": 3,              // which round the pick is
+    "roster_id": 2,          // roster_id of original owner
+    "previous_owner_id": 2,  // roster_id of previous owner
+    "owner_id": 1,           // roster_id of current owner
+  },
+  ...
+]
+```
+
+This endpoint retrieves all traded picks in a draft.
+
+### HTTP Request
+
+`GET https://api.sleeper.app/v1/draft/<draft_id>/traded_picks`
 
 ### URL Parameters
 
