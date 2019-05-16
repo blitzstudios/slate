@@ -248,6 +248,12 @@
                   <li>
                     <a href="#getting-the-playoff-bracket" class="toc-h2 toc-link" data-title="getting-the-playoff-bracket">Getting the playoff bracket</a>
                   </li>
+                  <li>
+                    <a href="#get-transactions" class="toc-h2 toc-link" data-title="get-transactions">Get transactions</a>
+                  </li>
+                  <li>
+                    <a href="#get-traded-picks" class="toc-h2 toc-link" data-title="get-traded-picks">Get traded picks</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -264,6 +270,9 @@
                   </li>
                   <li>
                     <a href="#get-all-picks-in-a-draft" class="toc-h2 toc-link" data-title="get-all-picks-in-a-draft">Get all picks in a draft</a>
+                  </li>
+                  <li>
+                    <a href="#get-traded-picks-in-a-draft" class="toc-h2 toc-link" data-title="get-traded-picks-in-a-draft">Get traded picks in a draft</a>
                   </li>
               </ul>
           </li>
@@ -635,6 +644,132 @@ curl <span class="s2">"https://api.sleeper.app/v1/league/&lt;league_id&gt;/loser
 <td>The ID of the league to retrieve matchups from</td>
 </tr>
 </tbody></table>
+<h2 id='get-transactions'>Get transactions</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sleeper.app/v1/league/&lt;league_id&gt;/transactions/&lt;round&gt;"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"trade"</span><span class="p">,</span>
+    <span class="s2">"transaction_id"</span><span class="p">:</span> <span class="s2">"434852362033561600"</span><span class="p">,</span>
+    <span class="s2">"status_updated"</span><span class="p">:</span> <span class="mi">1558039402803</span><span class="p">,</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"complete"</span><span class="p">,</span>
+    <span class="s2">"settings"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>     <span class="c1">// trades do not use this field</span>
+    <span class="s2">"roster_ids"</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="c1">// roster_ids involved in this transaction</span>
+    <span class="s2">"metadata"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="s2">"leg"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>         <span class="c1">// in football, this is the week</span>
+    <span class="s2">"drops"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="s2">"draft_picks"</span><span class="p">:</span> <span class="p">[</span>  <span class="c1">// picks that were traded</span>
+      <span class="p">{</span>
+        <span class="s2">"season"</span><span class="p">:</span> <span class="s2">"2019"</span><span class="p">,</span><span class="c1">// the season this draft pick belongs to</span>
+        <span class="s2">"round"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>      <span class="c1">// which round this draft pick is</span>
+        <span class="s2">"roster_id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>  <span class="c1">// original owner's roster_id</span>
+        <span class="s2">"previous_owner_id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>  <span class="c1">// previous owner's roster id (in this trade)</span>
+        <span class="s2">"owner_id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>   <span class="c1">// the new owner of this pick after the trade</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">"season"</span><span class="p">:</span> <span class="s2">"2019"</span><span class="p">,</span>
+        <span class="s2">"round"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">"roster_id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">"previous_owner_id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">"owner_id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">"creator"</span><span class="p">:</span> <span class="s2">"160000000000000000"</span><span class="p">,</span>  <span class="c1">// user id who initiated the transaction</span>
+    <span class="s2">"created"</span><span class="p">:</span> <span class="mi">1558039391576</span><span class="p">,</span>
+    <span class="s2">"consenter_ids"</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="c1">// roster_ids of the people who agreed to this transaction</span>
+    <span class="s2">"adds"</span><span class="p">:</span> <span class="kc">null</span>
+    <span class="s2">"waiver_budget"</span><span class="p">:</span> <span class="p">[</span>   <span class="c1">// roster_id 2 sends 55 FAAB dollars to roster_id 3</span>
+      <span class="p">{</span>
+        <span class="s2">"sender"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">"receiver"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">"amount"</span><span class="p">:</span> <span class="mi">55</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"free_agent"</span><span class="p">,</span>  <span class="c1">// could be waiver or trade as well</span>
+    <span class="s2">"transaction_id"</span><span class="p">:</span> <span class="s2">"434890120798142464"</span><span class="p">,</span>
+    <span class="s2">"status_updated"</span><span class="p">:</span> <span class="mi">1558048393967</span><span class="p">,</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"complete"</span><span class="p">,</span>
+    <span class="s2">"settings"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>   <span class="c1">// could be {'waiver_bid': 44} if it's FAAB waivers</span>
+    <span class="s2">"roster_ids"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span>  <span class="c1">// roster_ids involved in this transaction</span>
+    <span class="s2">"metadata"</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>   <span class="c1">// can contain notes in waivers like why it didn't go through</span>
+    <span class="s2">"leg"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"drops"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"1736"</span><span class="p">:</span> <span class="mi">1</span>         <span class="c1">// player id 1736 dropped from roster_id 1</span>
+    <span class="p">},</span>
+    <span class="s2">"draft_picks"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"creator"</span><span class="p">:</span> <span class="s2">"160000000000000000"</span><span class="p">,</span>
+    <span class="s2">"created"</span><span class="p">:</span> <span class="mi">1558048393967</span><span class="p">,</span>
+    <span class="s2">"consenter_ids"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="c1">// the roster_ids who agreed to this transaction</span>
+    <span class="s2">"adds"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"2315"</span><span class="p">:</span> <span class="mi">1</span>   <span class="c1">// player id 2315 added to roster_id 1</span>
+      <span class="p">...</span>
+    <span class="p">},</span>
+    <span class="s2">"waiver_budget"</span><span class="p">:</span> <span class="p">[]</span>  <span class="c1">// this used for trades only involving FAAB</span>
+  <span class="p">},</span>
+  <span class="p">...</span>
+<span class="p">]</span>
+</code></pre>
+<p>This endpoint retrieves all traded picks in a league, including future picks.</p>
+<h3 id='http-request-7'>HTTP Request</h3>
+<p><code>GET https://api.sleeper.app/v1/league/&lt;league_id&gt;/transactions/&lt;round&gt;</code></p>
+<h3 id='url-parameters-7'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>league_id</td>
+<td>The ID of the draft to retrieve picks for</td>
+</tr>
+<tr>
+<td>round</td>
+<td>The week you want to pull from</td>
+</tr>
+</tbody></table>
+<h2 id='get-traded-picks'>Get traded picks</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sleeper.app/v1/league/&lt;league_id&gt;/traded_picks"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"season"</span><span class="p">:</span> <span class="s2">"2019"</span><span class="p">,</span>        <span class="c1">// which season the pick is for</span>
+    <span class="s2">"round"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>              <span class="c1">// which round the pick is</span>
+    <span class="s2">"roster_id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>          <span class="c1">// roster_id of ORIGINAL owner</span>
+    <span class="s2">"previous_owner_id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>  <span class="c1">// roster_id of the previous owner</span>
+    <span class="s2">"owner_id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>           <span class="c1">// roster_id of current owner</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">"season"</span><span class="p">:</span> <span class="s2">"2020"</span><span class="p">,</span>        <span class="c1">// which season the pick is for</span>
+    <span class="s2">"round"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>              <span class="c1">// which round the pick is</span>
+    <span class="s2">"roster_id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>          <span class="c1">// roster_id of original owner</span>
+    <span class="s2">"previous_owner_id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>  <span class="c1">// roster_id of previous owner</span>
+    <span class="s2">"owner_id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>           <span class="c1">// roster_id of current owner</span>
+  <span class="p">},</span>
+  <span class="p">...</span>
+<span class="p">]</span>
+</code></pre>
+<p>This endpoint retrieves all traded picks in a league, including future picks.</p>
+<h3 id='http-request-8'>HTTP Request</h3>
+<p><code>GET https://api.sleeper.app/v1/league/&lt;league_id&gt;/traded_picks</code></p>
+<h3 id='url-parameters-8'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>league_id</td>
+<td>The ID of the league to retrieve traded picks for</td>
+</tr>
+</tbody></table>
 <h1 id='drafts'>Drafts</h1><h2 id='get-all-drafts-for-user'>Get all drafts for user</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sleeper.app/v1/user/&lt;user_id&gt;/drafts/nfl/2018"</span>
 </code></pre>
 <blockquote>
@@ -904,10 +1039,48 @@ curl <span class="s2">"https://api.sleeper.app/v1/league/&lt;league_id&gt;/loser
   <span class="p">...</span>
 <span class="p">]</span>
 </code></pre>
-<p>This endpoint retrieves all rosters in a league.</p>
+<p>This endpoint retrieves all picks in a draft.</p>
 <h3 id='http-request-4'>HTTP Request</h3>
 <p><code>GET https://api.sleeper.app/v1/draft/&lt;draft_id&gt;/picks</code></p>
 <h3 id='url-parameters-4'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>draft_id</td>
+<td>The ID of the draft to retrieve picks for</td>
+</tr>
+</tbody></table>
+<h2 id='get-traded-picks-in-a-draft'>Get traded picks in a draft</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sleeper.app/v1/draft/&lt;draft_id&gt;/traded_picks"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"season"</span><span class="p">:</span> <span class="s2">"2019"</span><span class="p">,</span>
+    <span class="s2">"round"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>              <span class="c1">// which round the pick is</span>
+    <span class="s2">"roster_id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>          <span class="c1">// roster_id of ORIGINAL owner</span>
+    <span class="s2">"previous_owner_id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>  <span class="c1">// roster_id of the previous owner</span>
+    <span class="s2">"owner_id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>           <span class="c1">// roster_id of current owner</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">"season"</span><span class="p">:</span> <span class="s2">"2019"</span><span class="p">,</span>
+    <span class="s2">"round"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>              <span class="c1">// which round the pick is</span>
+    <span class="s2">"roster_id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>          <span class="c1">// roster_id of original owner</span>
+    <span class="s2">"previous_owner_id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>  <span class="c1">// roster_id of previous owner</span>
+    <span class="s2">"owner_id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>           <span class="c1">// roster_id of current owner</span>
+  <span class="p">},</span>
+  <span class="p">...</span>
+<span class="p">]</span>
+</code></pre>
+<p>This endpoint retrieves all traded picks in a draft.</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>GET https://api.sleeper.app/v1/draft/&lt;draft_id&gt;/traded_picks</code></p>
+<h3 id='url-parameters-5'>URL Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
