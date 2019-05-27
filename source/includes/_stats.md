@@ -64,6 +64,10 @@ curl "https://api.sleeper.app/v1/projections/nfl/regular/2018/1"
   ...
 ```
 
+<aside class="notice">
+If you are using these stats for commercial purposes, please contact [sportsdata.io](https://sportsdata.io) regarding pricing.
+</aside>
+
 The following endpoints return season and weekly stats as well as projections.  
 
 The result is a map of `player_id` to stat maps.

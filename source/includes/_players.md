@@ -1,6 +1,8 @@
 # Players
 
-> To fetch a user object, use this code:
+## Fetch all players
+
+> To fetch all players, use this code:
 
 ```shell
 curl "https://api.sleeper.app/v1/players/nfl"
@@ -57,3 +59,34 @@ Since rosters and draft picks contain `Player IDs` which look like `"1042"`, `"2
 You should **save this information on your own servers** as this is not intended to be called every time you need to look up players due to the filesize being close to 5MB in size.  You do not need to call this endpoint more than once per day.
 
 `GET https://api.sleeper.app/v1/players/nfl`
+
+## Trending Players
+
+> To get a list of trending players based on add/drop activity:
+
+```shell
+curl "https://api.sleeper.app/v1/players/nfl/trending/add"
+```
+
+> You will get a JSON response that looks something like this:
+
+```javascript
+[
+  {
+    "player_id": "1111", // the player_id
+    "count": 45         // number or adds
+  },
+  ...
+]
+```
+
+You can use this endpoint to get a list of trending players based on adds or drops in the past 24 hours.
+
+`GET https://api.sleeper.app/v1/players/<sport>/trending/<type>`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+sport     | The sport, such as `nfl`
+type      | Either `add` or `drop`
