@@ -278,6 +278,14 @@
           </li>
           <li>
             <a href="#players" class="toc-h1 toc-link" data-title="players">Players</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#fetch-all-players" class="toc-h2 toc-link" data-title="fetch-all-players">Fetch all players</a>
+                  </li>
+                  <li>
+                    <a href="#trending-players" class="toc-h2 toc-link" data-title="trending-players">Trending Players</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#stats" class="toc-h1 toc-link" data-title="stats">Stats</a>
@@ -1092,9 +1100,9 @@ curl <span class="s2">"https://api.sleeper.app/v1/league/&lt;league_id&gt;/loser
 <td>The ID of the draft to retrieve picks for</td>
 </tr>
 </tbody></table>
-<h1 id='players'>Players</h1>
+<h1 id='players'>Players</h1><h2 id='fetch-all-players'>Fetch all players</h2>
 <blockquote>
-<p>To fetch a user object, use this code:</p>
+<p>To fetch all players, use this code:</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sleeper.app/v1/players/nfl"</span>
 </code></pre>
@@ -1148,6 +1156,42 @@ Please use this call sparingly, as it is intended only to be used once per day a
 <p>You should <strong>save this information on your own servers</strong> as this is not intended to be called every time you need to look up players due to the filesize being close to 5MB in size.  You do not need to call this endpoint more than once per day.</p>
 
 <p><code>GET https://api.sleeper.app/v1/players/nfl</code></p>
+<h2 id='trending-players'>Trending Players</h2>
+<blockquote>
+<p>To get a list of trending players based on add/drop activity:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sleeper.app/v1/players/nfl/trending/add"</span>
+</code></pre>
+<blockquote>
+<p>You will get a JSON response that looks something like this:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">"player_id"</span><span class="p">:</span> <span class="s2">"1111"</span><span class="p">,</span> <span class="c1">// the player_id</span>
+    <span class="s2">"count"</span><span class="p">:</span> <span class="mi">45</span>         <span class="c1">// number or adds</span>
+  <span class="p">},</span>
+  <span class="p">...</span>
+<span class="p">]</span>
+</code></pre>
+<p>You can use this endpoint to get a list of trending players based on adds or drops in the past 24 hours.</p>
+
+<p><code>GET https://api.sleeper.app/v1/players/&lt;sport&gt;/trending/&lt;type&gt;</code></p>
+<h3 id='url-parameters'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>sport</td>
+<td>The sport, such as <code>nfl</code></td>
+</tr>
+<tr>
+<td>type</td>
+<td>Either <code>add</code> or <code>drop</code></td>
+</tr>
+</tbody></table>
 <h1 id='stats'>Stats</h1><h2 id='stats-and-projections'>Stats and Projections</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sleeper.app/v1/stats/nfl/regular/2018"</span>
 curl <span class="s2">"https://api.sleeper.app/v1/stats/nfl/regular/2018/1"</span>
 curl <span class="s2">"https://api.sleeper.app/v1/projections/nfl/regular/2018"</span>
@@ -1207,6 +1251,10 @@ curl <span class="s2">"https://api.sleeper.app/v1/projections/nfl/regular/2018/1
   <span class="p">},</span>
   <span class="p">...</span>
 </code></pre>
+<aside class="notice">
+If you are using these stats for commercial purposes, please contact [sportsdata.io](https://sportsdata.io) regarding pricing.
+</aside>
+
 <p>The following endpoints return season and weekly stats as well as projections.  </p>
 
 <p>The result is a map of <code>player_id</code> to stat maps.</p>
