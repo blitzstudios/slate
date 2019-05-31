@@ -1173,9 +1173,18 @@ Please use this call sparingly, as it is intended only to be used once per day a
   <span class="p">...</span>
 <span class="p">]</span>
 </code></pre>
+<blockquote>
+<p>Want to embed this on your app? Copy the code below:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>&lt;iframe src="https://sleeper.app/embed/players/nfl/trending/add?lookback_hours=24&amp;limit=25" width="350" height="500" allowtransparency="true" frameborder="0"&gt;&lt;/iframe&gt;
+</code></pre>
+<aside class="notice">
+Please give attribution to Sleeper you are using our trending data.  If you'd like to embed our trending list on your website or blog, please use the embed code on the right.
+</aside>
+
 <p>You can use this endpoint to get a list of trending players based on adds or drops in the past 24 hours.</p>
 
-<p><code>GET https://api.sleeper.app/v1/players/&lt;sport&gt;/trending/&lt;type&gt;</code></p>
+<p><code>GET https://api.sleeper.app/v1/players/&lt;sport&gt;/trending/&lt;type&gt;?lookback_hours=&lt;hours&gt;&amp;limit=&lt;int&gt;</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1190,6 +1199,14 @@ Please use this call sparingly, as it is intended only to be used once per day a
 <tr>
 <td>type</td>
 <td>Either <code>add</code> or <code>drop</code></td>
+</tr>
+<tr>
+<td>lookback_hours</td>
+<td>Number of hours to look back (default is 24) - optional</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Number of results you want, (default is 25) - optional</td>
 </tr>
 </tbody></table>
 <h1 id='stats'>Stats</h1><h2 id='stats-and-projections'>Stats and Projections</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sleeper.app/v1/stats/nfl/regular/2018"</span>
