@@ -80,9 +80,19 @@ curl "https://api.sleeper.app/v1/players/nfl/trending/add"
 ]
 ```
 
+> Want to embed this on your app? Copy the code below:
+
+```
+<iframe src="https://sleeper.app/embed/players/nfl/trending/add?lookback_hours=24&limit=25" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>
+```
+
+<aside class="notice">
+Please give attribution to Sleeper you are using our trending data.  If you'd like to embed our trending list on your website or blog, please use the embed code on the right.
+</aside>
+
 You can use this endpoint to get a list of trending players based on adds or drops in the past 24 hours.
 
-`GET https://api.sleeper.app/v1/players/<sport>/trending/<type>`
+`GET https://api.sleeper.app/v1/players/<sport>/trending/<type>?lookback_hours=<hours>&limit=<int>`
 
 ### URL Parameters
 
@@ -90,3 +100,5 @@ Parameter | Description
 --------- | -----------
 sport     | The sport, such as `nfl`
 type      | Either `add` or `drop`
+lookback_hours | Number of hours to look back (default is 24) - optional
+limit     | Number of results you want, (default is 25) - optional
