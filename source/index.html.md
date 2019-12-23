@@ -13,7 +13,6 @@ includes:
   - leagues
   - drafts
   - players
-  - stats
   - errors
 
 search: true
