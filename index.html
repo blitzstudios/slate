@@ -288,14 +288,6 @@
               </ul>
           </li>
           <li>
-            <a href="#stats" class="toc-h1 toc-link" data-title="stats">Stats</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#stats-and-projections" class="toc-h2 toc-link" data-title="stats-and-projections">Stats and Projections</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="errors">Errors</a>
           </li>
       </div>
@@ -1207,104 +1199,6 @@ Please give attribution to Sleeper you are using our trending data.  If you'd li
 <tr>
 <td>limit</td>
 <td>Number of results you want, (default is 25) - optional</td>
-</tr>
-</tbody></table>
-<h1 id='stats'>Stats</h1><h2 id='stats-and-projections'>Stats and Projections</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sleeper.app/v1/stats/nfl/regular/2018"</span>
-curl <span class="s2">"https://api.sleeper.app/v1/stats/nfl/regular/2018/1"</span>
-curl <span class="s2">"https://api.sleeper.app/v1/projections/nfl/regular/2018"</span>
-curl <span class="s2">"https://api.sleeper.app/v1/projections/nfl/regular/2018/1"</span>
-</code></pre>
-<blockquote>
-<p>The above commands return JSON structured like this:</p>
-</blockquote>
-<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
-  <span class="s2">"1001"</span><span class="p">:</span> <span class="p">{</span> <span class="cm">/* player_id */</span>
-    <span class="s2">"xpm"</span><span class="p">:</span> <span class="mf">2.7</span><span class="p">,</span>
-    <span class="s2">"xpa"</span><span class="p">:</span> <span class="mf">2.7</span><span class="p">,</span>
-    <span class="s2">"pts_std"</span><span class="p">:</span> <span class="mf">7.17</span><span class="p">,</span>
-    <span class="s2">"pts_ppr"</span><span class="p">:</span> <span class="mf">7.17</span><span class="p">,</span>
-    <span class="s2">"pts_half_ppr"</span><span class="p">:</span> <span class="mf">7.2</span><span class="p">,</span>
-    <span class="s2">"gs"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"gp"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"gms_active"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"fgmiss"</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
-    <span class="s2">"fgm_yds_over_30"</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
-    <span class="s2">"fgm_yds"</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span>
-    <span class="s2">"fgm_pct"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-    <span class="s2">"fgm_50p"</span><span class="p">:</span> <span class="mf">0.22</span><span class="p">,</span>
-    <span class="s2">"fgm_40_49"</span><span class="p">:</span> <span class="mf">0.52</span><span class="p">,</span>
-    <span class="s2">"fgm_30_39"</span><span class="p">:</span> <span class="mf">0.53</span><span class="p">,</span>
-    <span class="s2">"fgm_20_29"</span><span class="p">:</span> <span class="mf">0.49</span><span class="p">,</span>
-    <span class="s2">"fgm_0_19"</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
-    <span class="s2">"fgm"</span><span class="p">:</span> <span class="mf">1.8</span><span class="p">,</span>
-    <span class="s2">"fga"</span><span class="p">:</span> <span class="mi">2</span>
-  <span class="p">},</span>
-  <span class="s2">"MIA"</span><span class="p">:</span> <span class="p">{</span>  <span class="cm">/* player_id */</span>
-    <span class="s2">"rush_ypa"</span><span class="p">:</span> <span class="mf">4.48</span><span class="p">,</span>
-    <span class="s2">"rush_yd"</span><span class="p">:</span> <span class="mf">22.77</span><span class="p">,</span>
-    <span class="s2">"rush_td"</span><span class="p">:</span> <span class="mf">0.12</span><span class="p">,</span>
-    <span class="s2">"rush_att"</span><span class="p">:</span> <span class="mf">5.66</span><span class="p">,</span>
-    <span class="s2">"pts_std"</span><span class="p">:</span> <span class="mf">16.85</span><span class="p">,</span>
-    <span class="s2">"pts_ppr"</span><span class="p">:</span> <span class="mf">16.85</span><span class="p">,</span>
-    <span class="s2">"pts_half_ppr"</span><span class="p">:</span> <span class="mf">16.9</span><span class="p">,</span>
-    <span class="s2">"pass_ypc"</span><span class="p">:</span> <span class="mf">9.41</span><span class="p">,</span>
-    <span class="s2">"pass_ypa"</span><span class="p">:</span> <span class="mf">6.05</span><span class="p">,</span>
-    <span class="s2">"pass_yd"</span><span class="p">:</span> <span class="mf">216.97</span><span class="p">,</span>
-    <span class="s2">"pass_td_40p"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"pass_td"</span><span class="p">:</span> <span class="mf">1.85</span><span class="p">,</span>
-    <span class="s2">"pass_rtg"</span><span class="p">:</span> <span class="mf">92.13</span><span class="p">,</span>
-    <span class="s2">"pass_int"</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">,</span>
-    <span class="s2">"pass_inc"</span><span class="p">:</span> <span class="mf">10.75</span><span class="p">,</span>
-    <span class="s2">"pass_fd"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-    <span class="s2">"pass_cmp_40p"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="s2">"pass_cmp"</span><span class="p">:</span> <span class="mf">19.32</span><span class="p">,</span>
-    <span class="s2">"pass_att"</span><span class="p">:</span> <span class="mf">30.07</span><span class="p">,</span>
-    <span class="s2">"gs"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"gp"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"gms_active"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"fum_lost"</span><span class="p">:</span> <span class="mf">0.16</span><span class="p">,</span>
-    <span class="s2">"fum"</span><span class="p">:</span> <span class="mf">0.16</span><span class="p">,</span>
-    <span class="s2">"cmp_pct"</span><span class="p">:</span> <span class="mf">63.9</span>
-  <span class="p">},</span>
-  <span class="p">...</span>
-</code></pre>
-<aside class="notice">
-If you are using these stats for commercial purposes, please contact [sportsdata.io](https://sportsdata.io) regarding pricing.
-</aside>
-
-<p>The following endpoints return season and weekly stats as well as projections.  </p>
-
-<p>The result is a map of <code>player_id</code> to stat maps.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>GET https://api.sleeper.app/v1/stats/&lt;sport&gt;/&lt;season_type&gt;/&lt;season&gt;</code></p>
-
-<p><code>GET https://api.sleeper.app/v1/stats/&lt;sport&gt;/&lt;season_type&gt;/&lt;season&gt;/&lt;week&gt;</code></p>
-
-<p><code>GET https://api.sleeper.app/v1/projections/&lt;sport&gt;/&lt;season_type&gt;/&lt;season&gt;</code></p>
-
-<p><code>GET https://api.sleeper.app/v1/projections/&lt;sport&gt;/&lt;season_type&gt;/&lt;season&gt;/&lt;week&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>sport</td>
-<td>We only support &quot;nfl&quot; right now.</td>
-</tr>
-<tr>
-<td>season_type</td>
-<td><code>regular</code>, <code>pre</code>, <code>post</code> are supported</td>
-</tr>
-<tr>
-<td>season</td>
-<td>Season can be 2017, 2018, etc...</td>
-</tr>
-<tr>
-<td>week</td>
-<td>Week can be 1, 2, 3, etc.</td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
