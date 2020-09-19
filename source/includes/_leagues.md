@@ -195,7 +195,9 @@ curl "https://api.sleeper.app/v1/league/<league_id>/matchups/<week>"
     "starters": ["421", "4035", "3242", "2133", "2449", "4531", "2257", "788", "PHI"],
     "roster_id": 1,
     "players": ["1352", "1387", "2118", "2133", "2182", "223", "2319", "2449", "3208", "4035", "421", "4881", "4892", "788", "CLE"],
-    "matchup_id": 2
+    "matchup_id": 2,
+    "points": 20.0 // total points for team based on league settings
+    "custom_points": null // if commissioner overrides points manually
   },
   ...
 ]
