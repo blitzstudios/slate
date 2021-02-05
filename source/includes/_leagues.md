@@ -403,3 +403,37 @@ This endpoint retrieves all traded picks in a league, including future picks.
 Parameter | Description
 --------- | -----------
 league_id | The ID of the league to retrieve traded picks for
+
+## Get NFL state
+
+```shell
+curl "https://api.sleeper.app/v1/state/nfl"
+```
+
+> The above command returns JSON structured like this:
+
+```javascript
+{
+  "week": 2, // week
+  "season_type": "regular", // pre, post, regular
+  "season_start_date": "2020-09-10", // regular season start
+  "season": "2020", // current season
+  "previous_season": "2019",
+  "leg": 2, // week of regular season
+  "league_season": "2021", // active season for leagues
+  "league_create_season": "2021", // flips in December
+  "display_week": 3 // Which week to display in UI, can be different than week
+}
+```
+
+This endpoint retrieves all traded picks in a league, including future picks.
+
+### HTTP Request
+
+`GET https://api.sleeper.app/v1/state/<sport>`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+sport     | nfl, nba, lcs, etc...
