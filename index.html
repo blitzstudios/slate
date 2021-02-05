@@ -254,6 +254,9 @@
                   <li>
                     <a href="#get-traded-picks" class="toc-h2 toc-link" data-title="get-traded-picks">Get traded picks</a>
                   </li>
+                  <li>
+                    <a href="#get-nfl-state" class="toc-h2 toc-link" data-title="get-nfl-state">Get NFL state</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -770,6 +773,38 @@ curl <span class="s2">"https://api.sleeper.app/v1/league/&lt;league_id&gt;/loser
 <tr>
 <td>league_id</td>
 <td>The ID of the league to retrieve traded picks for</td>
+</tr>
+</tbody></table>
+<h2 id='get-nfl-state'>Get NFL state</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sleeper.app/v1/state/nfl"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
+  <span class="s2">"week"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="c1">// week</span>
+  <span class="s2">"season_type"</span><span class="p">:</span> <span class="s2">"regular"</span><span class="p">,</span> <span class="c1">// pre, post, regular</span>
+  <span class="s2">"season_start_date"</span><span class="p">:</span> <span class="s2">"2020-09-10"</span><span class="p">,</span> <span class="c1">// regular season start</span>
+  <span class="s2">"season"</span><span class="p">:</span> <span class="s2">"2020"</span><span class="p">,</span> <span class="c1">// current season</span>
+  <span class="s2">"previous_season"</span><span class="p">:</span> <span class="s2">"2019"</span><span class="p">,</span>
+  <span class="s2">"leg"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="c1">// week of regular season</span>
+  <span class="s2">"league_season"</span><span class="p">:</span> <span class="s2">"2021"</span><span class="p">,</span> <span class="c1">// active season for leagues</span>
+  <span class="s2">"league_create_season"</span><span class="p">:</span> <span class="s2">"2021"</span><span class="p">,</span> <span class="c1">// flips in December</span>
+  <span class="s2">"display_week"</span><span class="p">:</span> <span class="mi">3</span> <span class="c1">// Which week to display in UI, can be different than week</span>
+<span class="p">}</span>
+</code></pre>
+<p>This endpoint retrieves all traded picks in a league, including future picks.</p>
+<h3 id='http-request-9'>HTTP Request</h3>
+<p><code>GET https://api.sleeper.app/v1/state/&lt;sport&gt;</code></p>
+<h3 id='url-parameters-9'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>sport</td>
+<td>nfl, nba, lcs, etc...</td>
 </tr>
 </tbody></table>
 <h1 id='drafts'>Drafts</h1><h2 id='get-all-drafts-for-user'>Get all drafts for user</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sleeper.app/v1/user/&lt;user_id&gt;/drafts/nfl/2018"</span>
