@@ -349,7 +349,7 @@ curl "https://api.sleeper.app/v1/league/<league_id>/transactions/<round>"
 ]
 ```
 
-This endpoint retrieves all traded picks in a league, including future picks.
+This endpoint retrieves all free agent transactions, waivers and trades.
 
 ### HTTP Request
 
@@ -426,7 +426,7 @@ curl "https://api.sleeper.app/v1/state/nfl"
 }
 ```
 
-This endpoint retrieves all traded picks in a league, including future picks.
+This endpoint returns information about the current state for any sport.
 
 ### HTTP Request
 
