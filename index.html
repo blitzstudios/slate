@@ -1136,6 +1136,13 @@ curl <span class="s2">"https://api.sleeper.app/v1/league/&lt;league_id&gt;/loser
 <pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sleeper.app/v1/players/nfl"</span>
 </code></pre>
 <blockquote>
+<p>You can also filter by position, by active status, or both:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.sleeper.app/v1/players/nfl?position=QB"</span>
+curl <span class="s2">"https://api.sleeper.app/v1/players/nfl?active=true"</span>
+curl <span class="s2">"https://api.sleeper.app/v1/players/nfl?position=QB&amp;active=true"</span>
+</code></pre>
+<blockquote>
 <p>You will get a JSON response that looks something like this:</p>
 </blockquote>
 <pre class="highlight javascript tab-javascript"><code><span class="p">{</span>
@@ -1184,7 +1191,25 @@ Please use this call sparingly, as it is intended only to be used once per day a
 
 <p>You should <strong>save this information on your own servers</strong> as this is not intended to be called every time you need to look up players due to the filesize being close to 5MB in size.  You do not need to call this endpoint more than once per day.</p>
 
-<p><code>GET https://api.sleeper.app/v1/players/nfl</code></p>
+<p><code>GET https://api.sleeper.app/v1/players/&lt;sport&gt;?position=&lt;position&gt;&amp;active=&lt;true&gt;</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>position</td>
+<td>Only return players whose fantasy positions include this position, such as <code>QB</code> - optional</td>
+</tr>
+<tr>
+<td>active</td>
+<td>Set to <code>true</code> to only return active players; any other value is ignored - optional</td>
+</tr>
+</tbody></table>
+
+<p>Both parameters can be used individually or combined.  Filtered responses are much smaller than the full 5MB player map, so they are a good fit if you only need a subset of players.</p>
 <h2 id='trending-players'>Trending Players</h2>
 <blockquote>
 <p>To get a list of trending players based on add/drop activity:</p>
