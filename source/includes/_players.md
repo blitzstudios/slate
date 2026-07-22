@@ -8,6 +8,14 @@
 curl "https://api.sleeper.app/v1/players/nfl"
 ```
 
+> You can also filter by position, by active status, or both:
+
+```shell
+curl "https://api.sleeper.app/v1/players/nfl?position=QB"
+curl "https://api.sleeper.app/v1/players/nfl?active=true"
+curl "https://api.sleeper.app/v1/players/nfl?position=QB&active=true"
+```
+
 > You will get a JSON response that looks something like this:
 
 ```javascript
@@ -58,7 +66,16 @@ Since rosters and draft picks contain `Player IDs` which look like `"1042"`, `"2
 
 You should **save this information on your own servers** as this is not intended to be called every time you need to look up players due to the filesize being close to 5MB in size.  You do not need to call this endpoint more than once per day.
 
-`GET https://api.sleeper.app/v1/players/nfl`
+`GET https://api.sleeper.app/v1/players/<sport>?position=<position>&active=<true>`
+
+### Query Parameters
+
+Parameter | Description
+--------- | -----------
+position  | Only return players whose fantasy positions include this position, such as `QB` - optional
+active    | Set to `true` to only return active players; any other value is ignored - optional
+
+Both parameters can be used individually or combined.  Filtered responses are much smaller than the full 5MB player map, so they are a good fit if you only need a subset of players.
 
 ## Trending Players
 
