@@ -22,7 +22,7 @@ search: true
 
 The Sleeper API is a read-only HTTP API that is free to use for **non-commercial purposes** and allows access to a user's leagues, drafts, and rosters.
 
-For commercial use of the Sleeper API, please reach out to us directly to discuss licensing.
+For commercial use of the Sleeper API, please reach out to us directly at [api@sleeper.app](mailto:api@sleeper.app) to discuss licensing.
 
 No API Token is necessary, as you **cannot modify** contents via this API.
 
